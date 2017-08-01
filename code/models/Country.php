@@ -1,31 +1,31 @@
 <?php
 /**
  * Countries for shipping and billing addresses.
- * 
+ *
  * @author Frank Mullenger <frankmullenger@gmail.com>
  * @copyright Copyright (c) 2012, Frank Mullenger
  * @package swipestripe
  * @subpackage order
  */
 class Country extends DataObject {
-	
+
 	/**
 	 * Singular name
-	 * 
+	 *
 	 * @var String
 	 */
 	private static $singular_name = 'Country';
-	
+
 	/**
 	 * Plural name
-	 * 
+	 *
 	 * @var String
 	 */
 	private static $plural_name = 'Countries';
-	
-	/** 
+
+	/**
 	 * ISO 3166 Country Codes, used to generate inital billing countries
-	 * 
+	 *
 	 * @see Country_Billing::requireDefaultRecords()
 	 * @var Array
 	 */
@@ -276,35 +276,35 @@ class Country extends DataObject {
 
 	/**
 	 * Basic fields for country code and title
-	 * 
+	 *
 	 * @var Array
 	 */
 	private static $db = array(
-		'Code' => 'Varchar(2)', //ISO 3166 
+		'Code' => 'Varchar(2)', //ISO 3166
 		'Title' => 'Varchar'
 	);
-	
+
 	/**
 	 * Associated with SiteConfig to enable editing
-	 * 
+	 *
 	 * @var Array
 	 */
 	private static $has_one = array (
 		'ShopConfig' => 'ShopConfig'
 	);
-	
+
 	/**
 	 * Countries can have many regions
-	 * 
+	 *
 	 * @var Array
 	 */
 	private static $has_many = array (
 		'Regions' => 'Region'
 	);
-	
+
 	/**
 	 * Summary fields
-	 * 
+	 *
 	 * @var Array
 	 */
 	private static $summary_fields = array(
@@ -316,93 +316,5 @@ class Country extends DataObject {
 
 	public static function get_codes() {
 		return self::$iso_3166_countryCodes;
-	}
-}
-
-/**
- * Shipping country
- * 
- * @author Frank Mullenger <frankmullenger@gmail.com>
- * @copyright Copyright (c) 2012, Frank Mullenger
- * @package swipestripe
- * @subpackage order
- */
-class Country_Shipping extends Country {
-
-	public function getCMSFields() {
-
-		$fields = new FieldList(
-			$rootTab = new TabSet('Root',
-				$tabMain = new Tab('Country',
-					TextField::create('Code', _t('Country.CODE', 'Code')),
-					TextField::create('Title', _t('Country.TITLE', 'Title'))
-				)
-			)
-		);
-
-		if ($this->isInDB()) {
-
-			$config = GridFieldConfig_BasicSortable::create();
-			// $detailForm = $config->getComponentByType('GridFieldDetailForm');
-			// $detailForm->setItemRequestClass('GridFieldDetailForm_HasManyItemRequest');
-
-			$listField = new GridField(
-				'Regions',
-				'Regions',
-				$this->Regions(),
-				$config
-			);
-
-			$fields->addFieldToTab('Root.Regions', $listField);
-		}
-
-		return $fields;
-	}
-
-	public function Regions() {
-		return Region_Shipping::get()
-			->where("\"CountryID\" = " . $this->ID);
-	}
-}
-
-/**
- * Billing country
- * 
- * @author Frank Mullenger <frankmullenger@gmail.com>
- * @copyright Copyright (c) 2012, Frank Mullenger
- * @package swipestripe
- * @subpackage order
- */
-class Country_Billing extends Country {
-	
-	/**
-	 * Build default list of billing countries
-	 * 
-	 * @see Country::$iso_3166_countryCodes
-	 * @see DataObject::requireDefaultRecords()
-	 */
-	public function requireDefaultRecords() {
-		
-		parent::requireDefaultRecords();
-		singleton('ShopConfig')->requireDefaultRecords();
-
-		if (!DataObject::get_one('Country_Billing')) {
-
-			$shopConfig = ShopConfig::current_shop_config();
-
-			foreach (self::$iso_3166_countryCodes as $code => $title) {
-				$country = new Country_Billing();
-				$country->Code = $code;
-				$country->Title = $title;
-				$country->ShopConfigID = $shopConfig->ID;
-				$country->write();
-			}
-			DB::alteration_message('Billing countries created', 'created');
-		}
-	}
-
-	public function Regions() {
-		return Region_Billing::get()
-			->where("\"CountryID\" = " . $this->ID);
 	}
 }
