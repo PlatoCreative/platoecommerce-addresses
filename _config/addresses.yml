@@ -1,0 +1,27 @@
+---
+name: SwipeStripe Addresses
+---
+
+Order:
+  extensions: 
+    - 'Addresses_Order'
+
+Customer:
+  extensions: 
+    - 'Addresses_Customer'
+
+OrderForm:
+  extensions: 
+    - 'Addresses_OrderForm'
+
+ShopConfig:
+  extensions: 
+    - 'Addresses_Extension'
+
+AccountPage_Controller:
+  extensions:
+    - 'AccountPageExtension_Controller'
+
+CheckoutPage_Controller:
+  extensions:
+    - ShippingCheckoutPage_Controller

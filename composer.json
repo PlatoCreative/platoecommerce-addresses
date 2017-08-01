@@ -1,0 +1,14 @@
+{
+	"name": "plato-creative/platoecommerce-addresses",
+	"description": "Module for billing and delivery addresses.",
+	"homepage": "http://swipestripe.com",
+	"license": "BSD-3-Clause",
+	"type": "silverstripe-module",
+	"keywords": ["silverstripe", "ecommerce", "e-commerce", "shop", "swipestripe", "swipe stripe", "addresses"],
+	"require":
+	{
+		"silverstripe/framework": "~3.1",
+		"silverstripe/cms": "~3.1",
+		"plato-creative/platoecommerce": "3.1.*"
+	}
+}
