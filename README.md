@@ -1,1 +1,1 @@
-# Plaatoecommerce Addresses
+# Platoecommerce Addresses
