@@ -3,8 +3,7 @@
 	"description": "Module for billing and delivery addresses.",
 	"homepage": "http://swipestripe.com",
 	"license": "BSD-3-Clause",
-	"type": "silverstripe-module",
-	"keywords": ["silverstripe", "ecommerce", "e-commerce", "shop", "swipestripe", "swipe stripe", "addresses"],
+	"keywords": ["silverstripe", "ecommerce"],
 	"require":
 	{
 		"silverstripe/framework": "~3.6",
