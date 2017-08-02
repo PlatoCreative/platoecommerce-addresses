@@ -25,8 +25,8 @@ class AccountPageExtension_Controller extends DataExtension {
 
     public function viewAddresses(){
         $this->owner->index();
-        Requirements::CSS('swipestripe-addresses/css/layout.css');
-        Requirements::javascript('swipestripe-addresses/javascript/Addresses_OrderForm.js');
+        Requirements::CSS('plato-ecommerce-addresses/css/layout.css');
+        Requirements::javascript('plato-ecommerce-addresses/javascript/Addresses_OrderForm.js');
 
         return $this->owner->render();
     }

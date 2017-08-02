@@ -220,7 +220,7 @@ class Addresses_OrderForm extends Extension {
 		Requirements::javascript(THIRDPARTY_DIR . '/jquery/jquery.js');
 		Requirements::javascript(THIRDPARTY_DIR . '/jquery-entwine/dist/jquery.entwine-dist.js');
 		Requirements::javascript(THIRDPARTY_DIR . '/jquery-validate/jquery.validate.min.js');
-		Requirements::javascript('swipestripe-addresses/javascript/Addresses_OrderForm.js');
+		Requirements::javascript('plato-ecommerce-addresses/javascript/Addresses_OrderForm.js');
 
 		$shippingAddSession = self::SessionAddress('shipping');
 
