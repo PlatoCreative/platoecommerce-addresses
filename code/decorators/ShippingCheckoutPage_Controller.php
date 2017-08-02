@@ -4,7 +4,7 @@
 */
 class ShippingCheckoutPage_Controller extends DataExtension {
 	public function onAfterInit(){
-		Requirements::CSS('swipestripe-addresses/css/layout.css');
+		Requirements::CSS('plato-ecommerce-addresses/css/layout.css');
 	}
 
 	private static $allowed_actions = array (
